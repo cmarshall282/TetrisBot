@@ -1,8 +1,11 @@
 package com.tetrisbot.game;
 
+import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.input.MouseInput;
 import com.tetrisbot.utils.ImageLoader;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -15,11 +18,14 @@ public class Game extends Canvas implements Runnable{
     private boolean running;
     private Thread thread;
     private State gameState;
+    private MainMenu menu;
 
     public Game() {
         running = false;
         new Window(width, height, title, this);
         gameState = State.MainMenu;
+        menu = new MainMenu(this);
+        addMouseListener(new MouseInput(this));
     }
 
     @Override
@@ -103,6 +109,13 @@ public class Game extends Canvas implements Runnable{
         g.drawImage(loadButton, 150, 530, this);
         g.drawImage(trainButton, 150, 610, this);
         g.drawImage(logo, 100, 80, this);
+    }
+
+    public void processMouseClick(MouseEvent e) {
+        // Do all mouse processing stuff here
+        if (gameState == State.MainMenu) {
+
+        }
     }
 
     public static void main(String[] args) {
