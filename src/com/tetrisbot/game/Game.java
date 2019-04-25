@@ -4,6 +4,7 @@ import com.tetrisbot.utils.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Game extends Canvas implements Runnable{
@@ -66,11 +67,7 @@ public class Game extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
 
         if(gameState == State.MainMenu) {
-            try {
-                drawMainMenu(g);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            drawMainMenu(g);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, width, height);
@@ -95,8 +92,12 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
-    private void drawMainMenu(Graphics g) throws IOException {
-        g.drawImage(ImageLoader.loadImage("images.jpeg"), 0, 0, this);
+    private void drawMainMenu(Graphics g){
+        BufferedImage backGround = ImageLoader.loadImage("MainMenuBackground.png");
+        g.drawImage(backGround, 0, 0, this);
+        g.setColor(Color.WHITE);
+        BufferedImage logo = ImageLoader.loadImage("TetrisLogo.png");
+        g.drawImage(logo, 100, 80, this);
     }
 
     public static void main(String[] args) {
