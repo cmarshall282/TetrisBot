@@ -94,9 +94,14 @@ public class Game extends Canvas implements Runnable{
 
     private void drawMainMenu(Graphics g){
         BufferedImage backGround = ImageLoader.loadImage("MainMenuBackground.png");
-        g.drawImage(backGround, 0, 0, this);
-        g.setColor(Color.WHITE);
         BufferedImage logo = ImageLoader.loadImage("TetrisLogo.png");
+        BufferedImage playerButton = ImageLoader.loadImage("playerButton.png");
+        BufferedImage loadButton = ImageLoader.loadImage("loadButton.png");
+        BufferedImage trainButton = ImageLoader.loadImage("trainButton.png");
+        g.drawImage(backGround, 0, 0, this);
+        g.drawImage(playerButton, 150, 450, this);
+        g.drawImage(loadButton, 150, 530, this);
+        g.drawImage(trainButton, 150, 610, this);
         g.drawImage(logo, 100, 80, this);
     }
 
