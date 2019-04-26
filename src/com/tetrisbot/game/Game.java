@@ -7,6 +7,7 @@ import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 
@@ -80,7 +81,7 @@ public class Game extends Canvas implements Runnable{
             gameDelay += delta;
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
-                block.updateY();
+                block.tick();
             }
         }
     }
@@ -134,5 +135,9 @@ public class Game extends Canvas implements Runnable{
 
     public void setState(State state) {
         this.gameState = state;
+    }
+
+    public void keyPressed(KeyEvent e) {
+        block.keyPressed(e);
     }
 }
