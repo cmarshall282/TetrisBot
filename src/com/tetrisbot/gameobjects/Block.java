@@ -7,15 +7,14 @@ import java.awt.*;
 public class Block {
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private final Color blockColor;
 
-    public Block() {
-
+    public Block(Color blockColor) {
+        this.blockColor = blockColor;
     }
 
     public void render(Game game, Graphics g) {
-        g.drawRect(x, y, width, height);
+        game.getBoard().fillCell(g, blockColor, x, y);
     }
 
     public void updateX() {
@@ -23,7 +22,7 @@ public class Block {
     }
 
     public void updateY() {
-        y--;
+        y++;
     }
 
     public int getX() {

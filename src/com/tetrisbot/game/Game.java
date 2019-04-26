@@ -1,5 +1,6 @@
 package com.tetrisbot.game;
 
+import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
 import com.tetrisbot.input.MouseInput;
 
@@ -16,6 +17,7 @@ public class Game extends Canvas implements Runnable{
     private Thread thread;
     private State gameState;
     private MainMenu mainMenu;
+    private Board board;
 
     public Game() {
         running = false;
@@ -23,6 +25,7 @@ public class Game extends Canvas implements Runnable{
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
         addMouseListener(new MouseInput(this));
+        board = new Board(10, 20, 40, 100);
     }
 
     @Override
@@ -101,5 +104,9 @@ public class Game extends Canvas implements Runnable{
 
     public void processMouseClick(MouseEvent e) {
         mainMenu.mousePressed(e);
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
