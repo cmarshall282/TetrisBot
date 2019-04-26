@@ -1,11 +1,13 @@
 package com.tetrisbot.game;
 
+import com.tetrisbot.gameobjects.MainMenu;
 import com.tetrisbot.utils.TetrisGraphics;
+import sun.applet.Main;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Game extends Canvas implements Runnable{
 
@@ -15,11 +17,13 @@ public class Game extends Canvas implements Runnable{
     private boolean running;
     private Thread thread;
     private State gameState;
+    private MainMenu mainMenu;
 
     public Game() {
         running = false;
         new Window(width, height, title, this);
         gameState = State.MainMenu;
+        mainMenu = new MainMenu(this);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class Game extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
 
         if(gameState == State.MainMenu) {
-            drawMainMenu(g);
+            mainMenu.render(g);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, width, height);
@@ -92,15 +96,11 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
-    private void drawMainMenu(Graphics g){
-        BufferedImage backGround = TetrisGraphics.loadImage("MainMenuBackground.png");
-        g.drawImage(backGround, 0, 0, this);
-        g.setColor(Color.WHITE);
-        BufferedImage logo = TetrisGraphics.loadImage("TetrisLogo.png");
-        g.drawImage(logo, 100, 80, this);
-    }
-
     public static void main(String[] args) {
         new Game();
+    }
+
+    public void processMouseClick(MouseEvent e) {
+
     }
 }
