@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Piece {
-    private Block[] blocks;
+    private Block[] blocks = new Block[4];
     private BlockConfig config;
 
     public Piece(Random r) {

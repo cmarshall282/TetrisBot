@@ -1,7 +1,7 @@
 package com.tetrisbot.gameobjects;
 
 import com.tetrisbot.game.Game;
-import com.tetrisbot.utils.ImageLoader;
+import com.tetrisbot.utils.TetrisGraphics;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -19,11 +19,11 @@ public class MainMenu {
     }
 
     public void render(Graphics g) {
-        BufferedImage backGround = ImageLoader.loadImage("MainMenuBackground.png");
-        BufferedImage logo = ImageLoader.loadImage("TetrisLogo.png");
-        BufferedImage playerButton = ImageLoader.loadImage("playerButton.png");
-        BufferedImage loadButton = ImageLoader.loadImage("loadButton.png");
-        BufferedImage trainButton = ImageLoader.loadImage("trainButton.png");
+        BufferedImage backGround = TetrisGraphics.loadImage("MainMenuBackground.png");
+        BufferedImage logo = TetrisGraphics.loadImage("TetrisLogo.png");
+        BufferedImage playerButton = TetrisGraphics.loadImage("playerButton.png");
+        BufferedImage loadButton = TetrisGraphics.loadImage("loadButton.png");
+        BufferedImage trainButton = TetrisGraphics.loadImage("trainButton.png");
         g.drawImage(backGround, 0, 0, game);
         g.drawImage(playerButton, 150, 450, game);
         g.drawImage(loadButton, 150, 530, game);

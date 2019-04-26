@@ -1,6 +1,6 @@
 package com.tetrisbot.game;
 
-import com.tetrisbot.utils.ImageLoader;
+import com.tetrisbot.utils.TetrisGraphics;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -93,10 +93,10 @@ public class Game extends Canvas implements Runnable{
     }
 
     private void drawMainMenu(Graphics g){
-        BufferedImage backGround = ImageLoader.loadImage("MainMenuBackground.png");
+        BufferedImage backGround = TetrisGraphics.loadImage("MainMenuBackground.png");
         g.drawImage(backGround, 0, 0, this);
         g.setColor(Color.WHITE);
-        BufferedImage logo = ImageLoader.loadImage("TetrisLogo.png");
+        BufferedImage logo = TetrisGraphics.loadImage("TetrisLogo.png");
         g.drawImage(logo, 100, 80, this);
     }
 
