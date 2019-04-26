@@ -32,7 +32,17 @@ public class MainMenu {
     }
 
     public void mousePressed(MouseEvent e) {
-
+        final Point loc = e.getPoint();
+        final Rectangle playerButton = new Rectangle(150, 450, 300, 60);
+        final Rectangle loadButton = new Rectangle(150, 530, 300, 60);
+        final Rectangle trainButton = new Rectangle(150, 610, 300, 60);
+        if(playerButton.contains(loc)) {
+            System.out.println("playerButton was pressed");
+        } else if (loadButton.contains(loc)) {
+            System.out.println("loadButton was pressed");
+        } else if (trainButton.contains(loc)) {
+            System.out.println("trainButton was pressed");
+        }
     }
 
 }

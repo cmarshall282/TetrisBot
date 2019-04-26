@@ -1,13 +1,11 @@
 package com.tetrisbot.game;
 
 import com.tetrisbot.gameobjects.MainMenu;
-import com.tetrisbot.utils.TetrisGraphics;
-import sun.applet.Main;
+import com.tetrisbot.input.MouseInput;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable{
 
@@ -24,6 +22,7 @@ public class Game extends Canvas implements Runnable{
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
+        addMouseListener(new MouseInput(this));
     }
 
     @Override
@@ -101,6 +100,6 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void processMouseClick(MouseEvent e) {
-
+        mainMenu.mousePressed(e);
     }
 }
