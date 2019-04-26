@@ -1,6 +1,6 @@
 package com.tetrisbot.utils;
 
-import com.tetrisbot.game.BlockConfig;
+import com.tetrisbot.gameobjects.BlockConfig;
 
 import java.util.Random;
 

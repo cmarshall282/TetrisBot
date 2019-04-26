@@ -1,4 +1,6 @@
-package com.tetrisbot.game;
+package com.tetrisbot.gameobjects;
+
+import com.tetrisbot.game.Game;
 
 import java.awt.*;
 
