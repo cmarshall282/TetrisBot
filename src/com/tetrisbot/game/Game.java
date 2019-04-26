@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable{
 
     private static final int width = 600;
-    private static final int height = 800;
+    private static int height = 800;
     private static final String title = "TETRIS BOT HA | dedicated to shawnipedia";
     private boolean running;
     private Thread thread;
@@ -25,6 +25,13 @@ public class Game extends Canvas implements Runnable{
     private Block block;
 
     public Game() {
+        if(System.getProperty("os.name").contains("Windows")) {
+            height += 35;
+        } else if(System.getProperty("os.name").contains("Mac")) {
+            System.out.println("Mac");
+            height += 22;
+        }
+
         gameDelay = 0.0;
         running = false;
         new Window(width, height, title, this);
@@ -100,7 +107,7 @@ public class Game extends Canvas implements Runnable{
 
     public synchronized void start() {
         running = true;
-        thread = new Thread(this);
+        if(thread == null) thread = new Thread(this);
         thread.start();
     }
 
