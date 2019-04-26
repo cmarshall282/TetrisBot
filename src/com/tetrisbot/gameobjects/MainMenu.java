@@ -1,6 +1,7 @@
 package com.tetrisbot.gameobjects;
 
 import com.tetrisbot.game.Game;
+import com.tetrisbot.game.State;
 import com.tetrisbot.utils.TetrisGraphics;
 
 import java.awt.*;
@@ -38,6 +39,7 @@ public class MainMenu {
         final Rectangle trainButton = new Rectangle(150, 610, 300, 60);
         if(playerButton.contains(loc)) {
             System.out.println("playerButton was pressed");
+            game.setState(State.Running);
         } else if (loadButton.contains(loc)) {
             System.out.println("loadButton was pressed");
         } else if (trainButton.contains(loc)) {

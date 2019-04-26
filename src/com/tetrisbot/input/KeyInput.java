@@ -18,6 +18,7 @@ public class KeyInput extends KeyAdapter {
         System.out.println("[DEBUG]: You pressed the '" + e.getKeyChar() + "' key.");
     }
 
+    @Override
     public void keyReleased(KeyEvent e) {
         System.out.println("[DEBUG]: You released the '" + e.getKeyChar() + "' key.");
     }

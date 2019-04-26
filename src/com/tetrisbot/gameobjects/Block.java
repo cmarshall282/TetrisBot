@@ -22,7 +22,7 @@ public class Block {
     }
 
     public void updateY() {
-        y++;
+        if(y <= 19) y++;
     }
 
     public int getX() {

@@ -1,7 +1,9 @@
 package com.tetrisbot.game;
 
+import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
 
 import java.awt.*;
@@ -18,14 +20,21 @@ public class Game extends Canvas implements Runnable{
     private State gameState;
     private MainMenu mainMenu;
     private Board board;
+    private double gameDelay;
+
+    private Block block;
 
     public Game() {
+        gameDelay = 0.0;
         running = false;
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
         addMouseListener(new MouseInput(this));
-        board = new Board(10, 20, 40, 100);
+        addKeyListener(new KeyInput(this));
+        board = new Board(this,10, 20, 40, 100);
+
+        block = new Block(Color.BLUE);
     }
 
     @Override
@@ -42,7 +51,7 @@ public class Game extends Canvas implements Runnable{
             delta += (now - lastTime) / ns;
             lastTime = now;
             while(delta >= 1) {
-                tick();
+                tick(delta);
                 delta--;
             }
             if(running) {
@@ -52,15 +61,21 @@ public class Game extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+                // System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
         stop();
     }
 
-    public void tick() {
-
+    public void tick(double delta) {
+        if(gameState == State.Running) {
+            gameDelay += delta;
+            if (gameDelay >= 60.0) {
+                gameDelay = 0.0;
+                block.updateY();
+            }
+        }
     }
 
     public void render() {
@@ -74,9 +89,9 @@ public class Game extends Canvas implements Runnable{
 
         if(gameState == State.MainMenu) {
             mainMenu.render(g);
-        } else {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, width, height);
+        } else if(gameState == State.Running){
+            board.render(g);
+            block.render(this, g);
         }
 
         g.dispose();
@@ -108,5 +123,9 @@ public class Game extends Canvas implements Runnable{
 
     public Board getBoard() {
         return board;
+    }
+
+    public void setState(State state) {
+        this.gameState = state;
     }
 }
