@@ -21,7 +21,7 @@ public class Block {
     }
 
     public void tick() {
-        if(y < 19) y++;
+        y++;
     }
 
     public void keyPressed(KeyEvent e) {
@@ -30,13 +30,21 @@ public class Block {
         if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
             if(x > 0) x--;
         } else if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-            if(x < 9) x++;
+            if(x + xPerm < 9) x++;
         }
     }
 
     public void setPerm(int xPerm, int yPerm) {
         this.xPerm = xPerm;
         this.yPerm = yPerm;
+    }
+
+    public int getxPerm() {
+        return xPerm;
+    }
+
+    public int getyPerm() {
+        return yPerm;
     }
 
     public int getX() {

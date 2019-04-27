@@ -20,8 +20,6 @@ public class IBlock extends BlockTemplate {
 
     @Override
     public void rotate() {
-        if(rotationState == 0) rotationState++;
-        if(rotationState == 1) rotationState = 0;
         switch(rotationState) {
             case 0:
                 blocks[0].setPerm(0, 0);
