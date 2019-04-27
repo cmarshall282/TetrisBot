@@ -3,6 +3,7 @@ package com.tetrisbot.game;
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.gameobjects.tetrispieces.IBlock;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
 
@@ -22,10 +23,12 @@ public class Game extends Canvas implements Runnable{
     private MainMenu mainMenu;
     private Board board;
     private double gameDelay;
+    private IBlock iBlock;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
-            height += 35;
+            //height += 29;
+            height += 29;
         } else if(System.getProperty("os.name").contains("Mac")) {
             System.out.println("Mac");
             height += 22;
@@ -33,6 +36,7 @@ public class Game extends Canvas implements Runnable{
 
         gameDelay = 0.0;
         running = false;
+        iBlock = new IBlock();
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
@@ -77,6 +81,7 @@ public class Game extends Canvas implements Runnable{
             gameDelay += delta;
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
+                iBlock.tick();
             }
         }
     }
@@ -94,6 +99,7 @@ public class Game extends Canvas implements Runnable{
             mainMenu.render(g);
         } else if(gameState == State.Running){
             board.render(g);
+            iBlock.render(this, g);
         }
 
         g.dispose();

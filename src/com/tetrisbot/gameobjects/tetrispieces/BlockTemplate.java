@@ -1,5 +1,6 @@
 package com.tetrisbot.gameobjects.tetrispieces;
 
+import com.tetrisbot.game.Game;
 import com.tetrisbot.gameobjects.Block;
 
 import java.awt.*;
@@ -17,11 +18,15 @@ public abstract class BlockTemplate {
     abstract public void rotate();
 
     public void tick() {
-
+        for(int i = 0; i < blocks.length; i++) {
+            blocks[i].tick();
+        }
     }
 
-    public void render(Graphics g) {
-
+    public void render(Game game, Graphics g) {
+        for(int i = 0; i < blocks.length; i++) {
+            blocks[i].render(game, g);
+        }
     }
 
 }
