@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
 
@@ -24,6 +25,7 @@ public class Game extends Canvas implements Runnable{
     private Board board;
     private double gameDelay;
     private IBlock iBlock;
+    private Random r;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -34,9 +36,10 @@ public class Game extends Canvas implements Runnable{
             height += 22;
         }
 
+        r = new Random();
         gameDelay = 0.0;
         running = false;
-        iBlock = new IBlock();
+        iBlock = new IBlock(r);
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
