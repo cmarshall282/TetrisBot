@@ -24,13 +24,13 @@ public class Block {
         y++;
     }
 
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e, boolean canMoveRight, boolean canMoveLeft) {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-            if(x > 0) x--;
+            if(canMoveLeft) x--;
         } else if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-            if(x + xPerm < 9) x++;
+            if(canMoveRight) x++;
         }
     }
 

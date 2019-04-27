@@ -41,10 +41,22 @@ public abstract class BlockTemplate {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+
+        boolean canMoveLeft = true;
+        boolean canMoveRight = true;
+        boolean canRotate = true;
+
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i].keyPressed(e);
+            if(blocks[i].getX() + blocks[i].getxPerm() == 9) canMoveRight = false;
+            if(blocks[i].getX() == 0) canMoveLeft = false;
+            if(blocks[i].getY() + blocks[i].getyPerm() == 19) canRotate = false;
         }
-        if(key == KeyEvent.VK_UP || key == KeyEvent.VK_W) rotate();
+
+        for(int i = 0; i < blocks.length; i++) {
+            blocks[i].keyPressed(e, canMoveRight, canMoveLeft);
+        }
+
+        if( (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && canRotate ) rotate();
     }
 
 }
