@@ -12,6 +12,7 @@ public class Board {
     private final int cellSize;
     private final int offset;
     private final Game game;
+    private BufferedImage[] blockImages;
 
     public Board(Game game, int width, int height, int cellSize, int offset) {
         this.game = game;
@@ -19,6 +20,14 @@ public class Board {
         this.height = height;
         this.cellSize = cellSize;
         this.offset = offset;
+
+        blockImages = new BufferedImage[6];
+        blockImages[0] = TetrisGraphics.loadImage("pieces/GreenPiece.png");
+        blockImages[1] = TetrisGraphics.loadImage("pieces/BluePiece.png");
+        blockImages[2] = TetrisGraphics.loadImage("pieces/OrangePiece.png");
+        blockImages[3] = TetrisGraphics.loadImage("pieces/PurplePiece.png");
+        blockImages[4] = TetrisGraphics.loadImage("pieces/RedPiece.png");
+        blockImages[5] = TetrisGraphics.loadImage("pieces/YellowPiece.png");
     }
 
     public void render(Graphics g) {
@@ -27,30 +36,25 @@ public class Board {
     }
 
     public void fillCell(Graphics g, BlockColor c, int x, int y) {
-        BufferedImage image;
         switch(c) {
             case GREEN:
-                image = TetrisGraphics.loadImage("pieces/GreenPiece.png");
+                g.drawImage(blockImages[0], x * cellSize + offset, y * cellSize, game);
                 break;
             case BLUE:
-                image = TetrisGraphics.loadImage("pieces/BluePiece.png");
+                g.drawImage(blockImages[1], x * cellSize + offset, y * cellSize, game);
                 break;
             case ORANGE:
-                image = TetrisGraphics.loadImage("pieces/OrangePiece.png");
+                g.drawImage(blockImages[2], x * cellSize + offset, y * cellSize, game);
                 break;
             case PURPLE:
-                image = TetrisGraphics.loadImage("pieces/PurplePiece.png");
+                g.drawImage(blockImages[3], x * cellSize + offset, y * cellSize, game);
                 break;
             case RED:
-                image = TetrisGraphics.loadImage("pieces/RedPiece.png");
+                g.drawImage(blockImages[4], x * cellSize + offset, y * cellSize, game);
                 break;
             case YELLOW:
-                image = TetrisGraphics.loadImage("pieces/YellowPiece.png");
-                break;
-            default:
-                image = null;
+                g.drawImage(blockImages[5], x * cellSize + offset, y * cellSize, game);
                 break;
         }
-        g.drawImage(image, x * cellSize + offset, y * cellSize, game);
     }
 }
