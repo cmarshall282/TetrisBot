@@ -27,11 +27,11 @@ public class Board {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(offset, 0, 400, 800);
         g.setColor(Color.WHITE);
-        for(int i = 0; i < width; i++) {
+        /*for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
                 g.drawRect(i * cellSize + offset, j * cellSize, 40, 40);
             }
-        }
+        }*/
     }
 
     public void fillCell(Graphics g, Color c, int x, int y) {

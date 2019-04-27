@@ -16,12 +16,11 @@ public class KeyInput extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         game.keyPressed(e);
-        System.out.println("[DEBUG]: You pressed the '" + e.getKeyChar() + "' key.");
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("[DEBUG]: You released the '" + e.getKeyChar() + "' key.");
+        //System.out.println("[DEBUG]: You released the '" + e.getKeyChar() + "' key.");
     }
 
 }

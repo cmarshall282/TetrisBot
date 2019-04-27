@@ -4,6 +4,7 @@ import com.tetrisbot.game.Game;
 import com.tetrisbot.gameobjects.Block;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public abstract class BlockTemplate {
 
@@ -18,8 +19,17 @@ public abstract class BlockTemplate {
     abstract public void rotate();
 
     public void tick() {
+
+        boolean flag = true;
+
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i].tick();
+            if(blocks[i].getY() + blocks[i].getyPerm() == 19) flag = false;
+        }
+
+        if(flag) {
+            for (int i = 0; i < blocks.length; i++) {
+                blocks[i].tick();
+            }
         }
     }
 
@@ -27,6 +37,14 @@ public abstract class BlockTemplate {
         for(int i = 0; i < blocks.length; i++) {
             blocks[i].render(game, g);
         }
+    }
+
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        for(int i = 0; i < blocks.length; i++) {
+            blocks[i].keyPressed(e);
+        }
+        if(key == KeyEvent.VK_UP || key == KeyEvent.VK_W) rotate();
     }
 
 }

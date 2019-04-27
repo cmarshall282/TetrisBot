@@ -138,5 +138,6 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
+        iBlock.keyPressed(e);
     }
 }
