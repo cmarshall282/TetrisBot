@@ -11,7 +11,6 @@ public class Board {
     private final int height;
     private final int cellSize;
     private final int offset;
-    private final BufferedImage bluePiece;
     private final Game game;
 
     public Board(Game game, int width, int height, int cellSize, int offset) {
@@ -20,18 +19,38 @@ public class Board {
         this.height = height;
         this.cellSize = cellSize;
         this.offset = offset;
-        bluePiece = TetrisGraphics.loadImage("pieces/BluePiece.png");
     }
 
     public void render(Graphics g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(offset, 0, 400, 800);
-        g.setColor(Color.WHITE);
     }
 
     public void fillCell(Graphics g, BlockColor c, int x, int y) {
-        if (c == BlockColor.BLUE) {
-            g.drawImage(bluePiece,x * cellSize + offset, y * cellSize, game);
+        BufferedImage image;
+        switch(c) {
+            case GREEN:
+                image = TetrisGraphics.loadImage("pieces/GreenPiece.png");
+                break;
+            case BLUE:
+                image = TetrisGraphics.loadImage("pieces/BluePiece.png");
+                break;
+            case ORANGE:
+                image = TetrisGraphics.loadImage("pieces/OrangePiece.png");
+                break;
+            case PURPLE:
+                image = TetrisGraphics.loadImage("pieces/PurplePiece.png");
+                break;
+            case RED:
+                image = TetrisGraphics.loadImage("pieces/RedPiece.png");
+                break;
+            case YELLOW:
+                image = TetrisGraphics.loadImage("pieces/YellowPiece.png");
+                break;
+            default:
+                image = null;
+                break;
         }
+        g.drawImage(image, x * cellSize + offset, y * cellSize, game);
     }
 }
