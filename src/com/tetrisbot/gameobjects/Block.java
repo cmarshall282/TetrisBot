@@ -10,9 +10,9 @@ public class Block {
     private int y;
     private int xPerm;
     private int yPerm;
-    private final Color blockColor;
+    private final BlockColor blockColor;
 
-    public Block(Color blockColor, int x, int y) {
+    public Block(BlockColor blockColor, int x, int y) {
         this.blockColor = blockColor;
     }
 
