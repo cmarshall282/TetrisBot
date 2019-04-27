@@ -23,8 +23,6 @@ public class Game extends Canvas implements Runnable{
     private Board board;
     private double gameDelay;
 
-    private Block block;
-
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
             height += 35;
@@ -41,8 +39,6 @@ public class Game extends Canvas implements Runnable{
         addMouseListener(new MouseInput(this));
         addKeyListener(new KeyInput(this));
         board = new Board(this,10, 20, 40, 100);
-
-        block = new Block(Color.BLUE);
     }
 
     @Override
@@ -81,7 +77,6 @@ public class Game extends Canvas implements Runnable{
             gameDelay += delta;
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
-                block.tick();
             }
         }
     }
@@ -99,7 +94,6 @@ public class Game extends Canvas implements Runnable{
             mainMenu.render(g);
         } else if(gameState == State.Running){
             board.render(g);
-            block.render(this, g);
         }
 
         g.dispose();
@@ -138,6 +132,5 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
-        block.keyPressed(e);
     }
 }
