@@ -41,4 +41,9 @@ public class IBlock extends BlockTemplate {
                 break;
         }
     }
+
+    @Override
+    public boolean checkRotation() {
+        return true;
+    }
 }

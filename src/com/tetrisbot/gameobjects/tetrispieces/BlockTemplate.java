@@ -17,6 +17,7 @@ public abstract class BlockTemplate {
     }
 
     abstract public void rotate();
+    abstract public boolean checkRotation();
 
     public void tick() {
 
@@ -50,6 +51,7 @@ public abstract class BlockTemplate {
             if(blocks[i].getX() + blocks[i].getxPerm() == 9) canMoveRight = false;
             if(blocks[i].getX() + blocks[i].getxPerm() == 0) canMoveLeft = false;
             if(blocks[i].getY() + blocks[i].getyPerm() == 19) canRotate = false;
+            if(canRotate) canRotate = checkRotation();
         }
 
         for(int i = 0; i < blocks.length; i++) {

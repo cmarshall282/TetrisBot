@@ -39,4 +39,9 @@ public class ZBlock extends BlockTemplate {
                 break;
         }
     }
+
+    @Override
+    public boolean checkRotation() {
+        return true;
+    }
 }

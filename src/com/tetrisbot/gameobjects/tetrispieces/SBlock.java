@@ -38,4 +38,9 @@ public class SBlock extends BlockTemplate {
                 break;
         }
     }
+
+    @Override
+    public boolean checkRotation() {
+        return true;
+    }
 }

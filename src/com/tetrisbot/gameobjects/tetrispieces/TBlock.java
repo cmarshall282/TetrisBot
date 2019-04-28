@@ -51,4 +51,9 @@ public class TBlock extends BlockTemplate{
                 break;
         }
     }
+
+    @Override
+    public boolean checkRotation() {
+        return true;
+    }
 }
