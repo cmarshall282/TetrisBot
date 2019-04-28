@@ -20,14 +20,13 @@ public class Board {
         this.height = height;
         this.cellSize = cellSize;
         this.offset = offset;
+        String[] fileNames = {"GreenPiece.png", "BluePiece.png", "OrangePiece.png", "PurplePiece.png",
+        "RedPiece.png", "YellowPiece.png"};
 
         blockImages = new BufferedImage[6];
-        blockImages[0] = TetrisGraphics.loadImage("pieces/GreenPiece.png");
-        blockImages[1] = TetrisGraphics.loadImage("pieces/BluePiece.png");
-        blockImages[2] = TetrisGraphics.loadImage("pieces/OrangePiece.png");
-        blockImages[3] = TetrisGraphics.loadImage("pieces/PurplePiece.png");
-        blockImages[4] = TetrisGraphics.loadImage("pieces/RedPiece.png");
-        blockImages[5] = TetrisGraphics.loadImage("pieces/YellowPiece.png");
+        for(int i = 0; i < blockImages.length; i++) {
+            blockImages[i] = TetrisGraphics.loadImage("pieces/" + fileNames[i]);
+        }
     }
 
     public void render(Graphics g) {
