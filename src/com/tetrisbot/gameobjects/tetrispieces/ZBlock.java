@@ -1,6 +1,7 @@
 package com.tetrisbot.gameobjects.tetrispieces;
 
 import com.tetrisbot.gameobjects.Block;
+import com.tetrisbot.gameobjects.BlockColor;
 import com.tetrisbot.utils.TetrisRandom;
 import com.tetrisbot.utils.Vector2D;
 
@@ -11,8 +12,9 @@ public class ZBlock extends BlockTemplate {
     public ZBlock(Random r) {
         super();
         rotationState = 3;
+        BlockColor c = TetrisRandom.chooseColor(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(TetrisRandom.chooseColor(r), 0, 0);
+            blocks[i] = new Block(c, 4, 0);
         }
         rotate();
     }

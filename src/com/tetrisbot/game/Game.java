@@ -3,6 +3,7 @@ package com.tetrisbot.game;
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
 import com.tetrisbot.gameobjects.tetrispieces.IBlock;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
