@@ -10,8 +10,10 @@ public abstract class BlockTemplate {
 
     protected Block[] blocks;
     protected int rotationState;
+    private boolean frozen;
 
     protected BlockTemplate() {
+        frozen = false;
         blocks = new Block[4];
         rotationState = 0;
     }
@@ -31,6 +33,8 @@ public abstract class BlockTemplate {
             for (int i = 0; i < blocks.length; i++) {
                 blocks[i].tick();
             }
+        } else if(!frozen) {
+            freeze();
         }
     }
 
@@ -41,24 +45,34 @@ public abstract class BlockTemplate {
     }
 
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
+        if(!frozen) {
+            int key = e.getKeyCode();
 
-        boolean canMoveLeft = true;
-        boolean canMoveRight = true;
-        boolean canRotate = true;
+            boolean canMoveLeft = true;
+            boolean canMoveRight = true;
+            boolean canRotate = true;
 
-        for(int i = 0; i < blocks.length; i++) {
-            if(blocks[i].getX() + blocks[i].getxPerm() == 9) canMoveRight = false;
-            if(blocks[i].getX() + blocks[i].getxPerm() == 0) canMoveLeft = false;
-            if(blocks[i].getY() + blocks[i].getyPerm() == 19) canRotate = false;
-            if(canRotate) canRotate = checkRotation();
+            for (int i = 0; i < blocks.length; i++) {
+                if (blocks[i].getX() + blocks[i].getxPerm() == 9) canMoveRight = false;
+                if (blocks[i].getX() + blocks[i].getxPerm() == 0) canMoveLeft = false;
+                if (blocks[i].getY() + blocks[i].getyPerm() == 19) canRotate = false;
+                if (canRotate) canRotate = checkRotation();
+            }
+
+            for (int i = 0; i < blocks.length; i++) {
+                blocks[i].keyPressed(e, canMoveRight, canMoveLeft);
+            }
+
+            if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && canRotate) rotate();
         }
+    }
 
-        for(int i = 0; i < blocks.length; i++) {
-            blocks[i].keyPressed(e, canMoveRight, canMoveLeft);
-        }
+    public void freeze() {
+        frozen = true;
+    }
 
-        if( (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && canRotate ) rotate();
+    public boolean isFrozen() {
+        return frozen;
     }
 
 }
