@@ -24,6 +24,13 @@ public class TBlock extends BlockTemplate{
         rotationState++;
         rotationState %= 4;
 
+        /*
+        (0, 1) (1, 0) (1, 1) (2, 1)
+        (1, 0) (2, 1) (1, 1) (1, 2)
+        (2, 1) (1, 2) (1, 1) (0, 1)
+        (1, 2) (0, 1) (1, 1) (1, 0)
+         */
+
         switch(rotationState) {
             case 0:
                 blocks[0].setPerm(0, 1);
@@ -33,13 +40,17 @@ public class TBlock extends BlockTemplate{
                 break;
             case 1:
                 blocks[0].setPerm(1, 0);
-                blocks[1].setPerm(1, 1);
-                blocks[2].setPerm(1, 2);
+                blocks[1].setPerm(2, 1);
+                blocks[3].setPerm(1, 2);
                 break;
             case 2:
-                blocks[0].setPerm(0, 1);
+                blocks[0].setPerm(2, 1);
+                blocks[1].setPerm(1, 2);
+                blocks[3].setPerm(0, 1);
                 break;
             case 3:
+                blocks[0].setPerm(1, 2);
+                blocks[1].setPerm(0, 1);
                 blocks[3].setPerm(1, 0);
                 break;
         }
