@@ -48,7 +48,7 @@ public abstract class BlockTemplate {
 
         for(int i = 0; i < blocks.length; i++) {
             if(blocks[i].getX() + blocks[i].getxPerm() == 9) canMoveRight = false;
-            if(blocks[i].getX() == 0) canMoveLeft = false;
+            if(blocks[i].getX() + blocks[i].getxPerm() == 0) canMoveLeft = false;
             if(blocks[i].getY() + blocks[i].getyPerm() == 19) canRotate = false;
         }
 
