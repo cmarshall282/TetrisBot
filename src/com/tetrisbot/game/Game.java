@@ -4,7 +4,6 @@ import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
 import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
-import com.tetrisbot.gameobjects.tetrispieces.IBlock;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
 import com.tetrisbot.utils.TetrisRandom;
@@ -19,7 +18,7 @@ public class Game extends Canvas implements Runnable{
 
     private static final int width = 600;
     private static int height = 800;
-    private static final String title = "TETRIS BOT HA | dedicated to shawnipedia";
+    private static final String title = "Tetris";
     private boolean running;
     private Thread thread;
     private State gameState;
@@ -28,6 +27,7 @@ public class Game extends Canvas implements Runnable{
     private double gameDelay;
     private Random r;
     private BlockTemplate currentBlock;
+    private Window window;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable{
         currentBlock = TetrisRandom.initBlock(r);
         gameDelay = 0.0;
         running = false;
-        new Window(width, height, title, this);
+        window = new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
         addMouseListener(new MouseInput(this));
@@ -74,7 +74,7 @@ public class Game extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                // System.out.println("FPS: " + frames);
+                window.setTitle("Tetris | " + frames + " FPS");
                 frames = 0;
             }
         }
