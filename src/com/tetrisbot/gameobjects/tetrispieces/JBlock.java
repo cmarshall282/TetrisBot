@@ -14,7 +14,7 @@ public class JBlock extends BlockTemplate {
         rotationState = 3; // will go to state 0 when rotate() is called
         BlockColor c = TetrisRandom.chooseColor(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(c, 4, 0);
+            blocks[i] = new Block(c, 5, 0);
         }
         rotate();
     }

@@ -13,7 +13,7 @@ public class TBlock extends BlockTemplate{
         rotationState = 3;
         BlockColor c = TetrisRandom.chooseColor(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(c, 4, 0);
+            blocks[i] = new Block(c, 0, 0);
         }
 
         rotate();

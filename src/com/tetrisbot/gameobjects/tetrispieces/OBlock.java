@@ -11,7 +11,7 @@ public class OBlock extends BlockTemplate {
         super();
         BlockColor c = TetrisRandom.chooseColor(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(c, 4, 0);
+            blocks[i] = new Block(c, 5, 0);
         }
 
         blocks[0].setPerm(1, 0);

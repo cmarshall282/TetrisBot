@@ -1,16 +1,17 @@
 package com.tetrisbot.game;
 
-import com.tetrisbot.gameobjects.*;
-import com.tetrisbot.gameobjects.tetrispieces.*;
+import com.tetrisbot.gameobjects.Block;
+import com.tetrisbot.gameobjects.Board;
+import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
+import com.tetrisbot.gameobjects.tetrispieces.IBlock;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
-import com.tetrisbot.utils.TetrisRandom;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
@@ -24,12 +25,12 @@ public class Game extends Canvas implements Runnable{
     private MainMenu mainMenu;
     private Board board;
     private double gameDelay;
+    private IBlock iBlock;
     private Random r;
-    private int currentBlock;
-    private ArrayList<BlockTemplate> blocks;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
+            //height += 29;
             height += 29;
         } else if(System.getProperty("os.name").contains("Mac")) {
             System.out.println("Mac");
@@ -37,11 +38,9 @@ public class Game extends Canvas implements Runnable{
         }
 
         r = new Random();
-        currentBlock = -1;
-        blocks = new ArrayList<>();
-        addBlock();
         gameDelay = 0.0;
         running = false;
+        iBlock = new IBlock(r);
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
@@ -86,8 +85,7 @@ public class Game extends Canvas implements Runnable{
             gameDelay += delta;
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
-                blocks.get(currentBlock).tick();
-                if(blocks.get(currentBlock).isFrozen()) addBlock();
+                iBlock.tick();
             }
         }
     }
@@ -105,9 +103,7 @@ public class Game extends Canvas implements Runnable{
             mainMenu.render(g);
         } else if(gameState == State.Running){
             board.render(g);
-            for(BlockTemplate block : blocks) {
-                block.render(this, g);
-            }
+            iBlock.render(this, g);
         }
 
         g.dispose();
@@ -146,33 +142,6 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
-        blocks.get(currentBlock).keyPressed(e);
-    }
-
-    private void addBlock() {
-        BlockConfig rPiece = TetrisRandom.chooseConfig(r);
-        currentBlock++;
-        switch(rPiece) {
-            case I_BLOCK:
-                blocks.add(new IBlock(r));
-                break;
-            case J_BLOCK:
-                blocks.add(new JBlock(r));
-                break;
-            case L_BLOCK:
-                blocks.add(new LBlock(r));
-                break;
-            case O_BLOCK:
-                blocks.add(new OBlock(r));
-                break;
-            case S_BLOCK:
-                blocks.add(new SBlock(r));
-                break;
-            case T_BLOCK:
-                blocks.add(new TBlock(r));
-                break;
-            case Z_BLOCK:
-                blocks.add(new ZBlock(r));
-        }
+        iBlock.keyPressed(e);
     }
 }
