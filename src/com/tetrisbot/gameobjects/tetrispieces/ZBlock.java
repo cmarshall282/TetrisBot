@@ -2,6 +2,7 @@ package com.tetrisbot.gameobjects.tetrispieces;
 
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.BlockColor;
+import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.utils.TetrisRandom;
 import com.tetrisbot.utils.Vector2D;
 
@@ -52,7 +53,7 @@ public class ZBlock extends BlockTemplate {
     }
 
     @Override
-    public boolean checkRotation() {
+    public boolean checkRotation(Board board) {
         int tempRot = rotationState;
         tempRot++;
         tempRot %= 4;
@@ -92,6 +93,10 @@ public class ZBlock extends BlockTemplate {
         if(block1.x < 0 || block1.x > 9 || block1.y > 19) return false;
         if(block2.x < 0 || block2.x > 9 || block2.y > 19) return false;
         if(block3.x < 0 || block3.x > 9 || block3.y > 19) return false;
+        if(board.cellOccupied(block0.x, block0.y)) return false;
+        if(board.cellOccupied(block1.x, block1.y)) return false;
+        if(board.cellOccupied(block2.x, block2.y)) return false;
+        if(board.cellOccupied(block3.x, block3.y)) return false;
         return true;
     }
 }

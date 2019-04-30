@@ -2,6 +2,7 @@ package com.tetrisbot.gameobjects.tetrispieces;
 
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.BlockColor;
+import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.utils.TetrisRandom;
 
 import java.util.Random;
@@ -25,7 +26,7 @@ public class OBlock extends BlockTemplate {
     }
 
     @Override
-    public boolean checkRotation() {
+    public boolean checkRotation(Board board) {
         return true;
     }
 }

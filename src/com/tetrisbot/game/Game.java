@@ -162,7 +162,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
-        currentBlock.keyPressed(e);
+        currentBlock.keyPressed(e, board);
     }
 
     public void keyReleased(KeyEvent e) {
