@@ -8,10 +8,9 @@ import java.util.Random;
 
 public class OBlock extends BlockTemplate {
     public OBlock(Random r) {
-        super();
-        BlockColor c = TetrisRandom.chooseColor(r);
+        super(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(c, 4, 0);
+            blocks[i] = new Block(color, 4, 0);
         }
 
         blocks[0].setPerm(1, 0);

@@ -10,11 +10,10 @@ import java.util.Random;
 public class ZBlock extends BlockTemplate {
 
     public ZBlock(Random r) {
-        super();
+        super(r);
         rotationState = 3;
-        BlockColor c = TetrisRandom.chooseColor(r);
         for(int i = 0; i < blocks.length; i++) {
-            blocks[i] = new Block(c, 4, 0);
+            blocks[i] = new Block(color, 4, 0);
         }
         rotate();
     }

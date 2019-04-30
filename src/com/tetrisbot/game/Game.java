@@ -3,9 +3,11 @@ package com.tetrisbot.game;
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
+import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
 import com.tetrisbot.gameobjects.tetrispieces.IBlock;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
+import com.tetrisbot.utils.TetrisRandom;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,8 +26,8 @@ public class Game extends Canvas implements Runnable{
     private MainMenu mainMenu;
     private Board board;
     private double gameDelay;
-    private IBlock iBlock;
     private Random r;
+    private BlockTemplate currentBlock;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -37,9 +39,9 @@ public class Game extends Canvas implements Runnable{
         }
 
         r = new Random();
+        currentBlock = TetrisRandom.initBlock(r);
         gameDelay = 0.0;
         running = false;
-        iBlock = new IBlock(r);
         new Window(width, height, title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
@@ -84,7 +86,17 @@ public class Game extends Canvas implements Runnable{
             gameDelay += delta;
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
-                iBlock.tick();
+                if(!currentBlock.checkCollision(board)) {
+                    currentBlock.tick();
+                } else {
+                    Block[] blocks = currentBlock.getBlocks();
+                    for(Block block : blocks) {
+                        final int x = block.getX() + block.getxPerm();
+                        final int y = block.getY() + block.getyPerm();
+                        board.setOccupiedColors(x, y, currentBlock.getColor());
+                    }
+                    currentBlock = TetrisRandom.initBlock(r);
+                }
             }
         }
     }
@@ -102,7 +114,7 @@ public class Game extends Canvas implements Runnable{
             mainMenu.render(g);
         } else if(gameState == State.Running){
             board.render(g);
-            iBlock.render(this, g);
+            currentBlock.render(this, g);
         }
 
         g.dispose();
@@ -141,6 +153,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
-        iBlock.keyPressed(e);
+        currentBlock.keyPressed(e);
     }
+
 }

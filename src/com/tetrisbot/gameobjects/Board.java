@@ -22,6 +22,14 @@ public class Board {
         this.cellSize = cellSize;
         this.offset = offset;
         this.occupiedColors = new BlockColor[width][height];
+
+        // set every value to null to start
+        for(int x = 0; x < occupiedColors.length; x++) {
+            for(int y = 0; y < occupiedColors[x].length; y++) {
+                occupiedColors[x][y] = null;
+            }
+        }
+
         String[] fileNames = {"GreenPiece.png", "BluePiece.png", "OrangePiece.png", "PurplePiece.png",
         "RedPiece.png", "YellowPiece.png"};
 
@@ -69,5 +77,12 @@ public class Board {
 
     public void setOccupiedColors(int x, int y, BlockColor c) {
         this.occupiedColors[x][y] = c;
+    }
+
+    public boolean cellOccupied(int x, int y) {
+        if(occupiedColors[x][y] != null) {
+            return true;
+        }
+        return false;
     }
 }
