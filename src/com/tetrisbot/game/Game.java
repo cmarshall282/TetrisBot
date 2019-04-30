@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable{
     private Random r;
     private BlockTemplate currentBlock;
     private Window window;
+    private int score;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -48,6 +49,7 @@ public class Game extends Canvas implements Runnable{
         addMouseListener(new MouseInput(this));
         addKeyListener(new KeyInput(this));
         board = new Board(this,10, 20, 40, 100);
+        score = 0;
     }
 
     @Override
@@ -167,4 +169,11 @@ public class Game extends Canvas implements Runnable{
         currentBlock.keyReleased(e);
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public String getStringScore() {
+        return "" + score;
+    }
 }

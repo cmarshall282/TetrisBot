@@ -50,6 +50,11 @@ public class Board {
                 }
             }
         }
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+        g.drawString("Score", 10, 25);
+        g.drawString(game.getStringScore(), 10, 50);
     }
 
     public void fillCell(Graphics g, BlockColor c, int x, int y) {
