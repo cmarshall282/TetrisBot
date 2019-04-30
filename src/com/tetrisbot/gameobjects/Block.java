@@ -13,6 +13,8 @@ public class Block {
     private final BlockColor blockColor;
 
     public Block(BlockColor blockColor, int x, int y) {
+        this.x = x;
+        this.y = y;
         this.blockColor = blockColor;
     }
 
