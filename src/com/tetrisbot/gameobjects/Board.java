@@ -13,6 +13,7 @@ public class Board {
     private final int offset;
     private final Game game;
     private BufferedImage[] blockImages;
+    private BlockColor[][] occupiedColors;
 
     public Board(Game game, int width, int height, int cellSize, int offset) {
         this.game = game;
@@ -20,6 +21,7 @@ public class Board {
         this.height = height;
         this.cellSize = cellSize;
         this.offset = offset;
+        this.occupiedColors = new BlockColor[width][height];
         String[] fileNames = {"GreenPiece.png", "BluePiece.png", "OrangePiece.png", "PurplePiece.png",
         "RedPiece.png", "YellowPiece.png"};
 
@@ -32,6 +34,14 @@ public class Board {
     public void render(Graphics g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(offset, 0, 400, 800);
+        for(int x = 0; x < occupiedColors.length; x++) {
+            for(int y = 0; y < occupiedColors[x].length; y++) {
+                BlockColor color = occupiedColors[x][y];
+                if(color != null) {
+                    fillCell(g, color, x, y);
+                }
+            }
+        }
     }
 
     public void fillCell(Graphics g, BlockColor c, int x, int y) {
@@ -55,5 +65,9 @@ public class Board {
                 g.drawImage(blockImages[5], x * cellSize + offset, y * cellSize, game);
                 break;
         }
+    }
+
+    public void setOccupiedColors(int x, int y, BlockColor c) {
+        this.occupiedColors[x][y] = c;
     }
 }
