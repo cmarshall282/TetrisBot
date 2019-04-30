@@ -84,6 +84,13 @@ public class Game extends Canvas implements Runnable{
     public void tick(double delta) {
         if(gameState == State.Running) {
             gameDelay += delta;
+            if (gameDelay >= 10.0) {
+                if(currentBlock.isMovingDown()) {
+                    if(!currentBlock.checkCollision(board)) {
+                        currentBlock.tick();
+                    }
+                }
+            }
             if (gameDelay >= 60.0) {
                 gameDelay = 0.0;
                 if(!currentBlock.checkCollision(board)) {
@@ -154,6 +161,10 @@ public class Game extends Canvas implements Runnable{
 
     public void keyPressed(KeyEvent e) {
         currentBlock.keyPressed(e);
+    }
+
+    public void keyReleased(KeyEvent e) {
+        currentBlock.keyReleased(e);
     }
 
 }

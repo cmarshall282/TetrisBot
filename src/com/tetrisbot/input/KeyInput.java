@@ -20,7 +20,7 @@ public class KeyInput extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //System.out.println("[DEBUG]: You released the '" + e.getKeyChar() + "' key.");
+        game.keyReleased(e);
     }
 
 }

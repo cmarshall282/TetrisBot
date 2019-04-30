@@ -15,8 +15,10 @@ public abstract class BlockTemplate {
     protected Block[] blocks;
     protected int rotationState;
     protected BlockColor color;
+    private boolean isMovingDown;
 
     protected BlockTemplate(Random r) {
+        isMovingDown = false;
         blocks = new Block[4];
         color = TetrisRandom.chooseColor(r);
         rotationState = 0;
@@ -56,6 +58,13 @@ public abstract class BlockTemplate {
         }
 
         if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && canRotate) rotate();
+        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) isMovingDown = true;
+    }
+
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) isMovingDown = false;
     }
 
     public boolean checkCollision(Board board) {
@@ -75,5 +84,9 @@ public abstract class BlockTemplate {
 
     public BlockColor getColor() {
         return color;
+    }
+
+    public boolean isMovingDown() {
+        return isMovingDown;
     }
 }
