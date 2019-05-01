@@ -1,6 +1,5 @@
 package com.tetrisbot.utils;
 
-import com.tetrisbot.gameobjects.BlockColor;
 import com.tetrisbot.gameobjects.BlockConfig;
 import com.tetrisbot.gameobjects.tetrispieces.*;
 
@@ -12,35 +11,30 @@ public class TetrisRandom {
         return BlockConfig.values()[index];
     }
 
-    public static BlockColor chooseColor(Random r) {
-        int index = r.nextInt(BlockColor.values().length);
-        return BlockColor.values()[index];
-    }
-
     public static BlockTemplate initBlock(Random r) {
         BlockConfig blockConfig = chooseConfig(r);
         BlockTemplate output = null;
         switch(blockConfig) {
             case I_BLOCK:
-                output =  new IBlock(r);
+                output =  new IBlock();
                 break;
             case J_BLOCK:
-                output = new JBlock(r);
+                output = new JBlock();
                 break;
             case L_BLOCK:
-                output = new LBlock(r);
+                output = new LBlock();
                 break;
             case O_BLOCK:
-                output = new OBlock(r);
+                output = new OBlock();
                 break;
             case S_BLOCK:
-                output = new SBlock(r);
+                output = new SBlock();
                 break;
             case T_BLOCK:
-                output = new TBlock(r);
+                output = new TBlock();
                 break;
             case Z_BLOCK:
-                output = new ZBlock(r);
+                output = new ZBlock();
                 break;
         }
         return output;
