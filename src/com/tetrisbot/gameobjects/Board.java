@@ -31,9 +31,9 @@ public class Board {
         }
 
         String[] fileNames = {"GreenPiece.png", "BluePiece.png", "OrangePiece.png", "PurplePiece.png",
-        "RedPiece.png", "YellowPiece.png"};
+        "RedPiece.png", "YellowPiece.png", "LightBluePIece.png"};
 
-        blockImages = new BufferedImage[6];
+        blockImages = new BufferedImage[7];
         for(int i = 0; i < blockImages.length; i++) {
             blockImages[i] = TetrisGraphics.loadImage("pieces/" + fileNames[i]);
         }
@@ -77,6 +77,8 @@ public class Board {
             case YELLOW:
                 g.drawImage(blockImages[5], x * cellSize + offset, y * cellSize, game);
                 break;
+            case LIGHT_BLUE:
+                g.drawImage(blockImages[6], x * cellSize + offset, y * cellSize, game);
         }
     }
 
@@ -89,5 +91,21 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    public int[] getFullRows() {
+        int[] rowsToClear = new int[4];
+        int listIndex = 0;
+        for(int x = 0; x < width; x++) {
+            int blocksInRow = 0;
+            for(int y = 0; y < height; y++) {
+                if(occupiedColors[x][y] != null) blocksInRow++;
+            }
+            if(blocksInRow == width) {
+                rowsToClear[listIndex] = x;
+                listIndex++;
+            }
+        }
+        return rowsToClear;
     }
 }
