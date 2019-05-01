@@ -31,6 +31,8 @@ public class Game extends Canvas implements Runnable{
     private Window window;
     private int score;
     private Sound song;
+    private Sound moveSound;
+    private Sound clearRowSound;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -43,6 +45,8 @@ public class Game extends Canvas implements Runnable{
 
         r = new Random();
         song = new Sound("TetrisTheme.wav", this);
+        moveSound = new Sound("MovementSound.wav", this);
+        clearRowSound = new Sound("ClearRowSound.wav", this);
         song.setVolume(0.1);
         currentBlock = TetrisRandom.initBlock(r);
         gameDelay = 0.0;
@@ -109,7 +113,7 @@ public class Game extends Canvas implements Runnable{
                         final int y = block.getY() + block.getyPerm();
                         board.setOccupiedColors(x, y, currentBlock.getColor());
                     }
-                    board.clearFullRows();
+                    if(board.clearFullRows()) clearRowSound.play();
                     currentBlock = TetrisRandom.initBlock(r);
                 }
             }
@@ -168,6 +172,11 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP ||
+        key == KeyEvent.VK_A || key == KeyEvent.VK_D || key == KeyEvent.VK_W) {
+            moveSound.play();
+        }
         currentBlock.keyPressed(e, board);
     }
 
@@ -189,5 +198,13 @@ public class Game extends Canvas implements Runnable{
 
     public void playSong() {
         song.loop();
+    }
+
+    public void playMoveSound() {
+        moveSound.play();
+    }
+
+    public void playClearRowSound() {
+        clearRowSound.play();
     }
 }

@@ -98,7 +98,7 @@ public class Board {
         return false;
     }
 
-    public void clearFullRows() {
+    public boolean clearFullRows() {
         // Initialize a list of rows to clear, set each value to -1 to mean null
         int[] rowsToClear = new int[4];
         for(int i = 0; i < rowsToClear.length; i++) {
@@ -147,5 +147,8 @@ public class Board {
                 game.addScore(1200);
                 break;
         }
+
+        if(listIndex == 0) return false;
+        else return true;
     }
 }
