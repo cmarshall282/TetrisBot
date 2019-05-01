@@ -3,13 +3,10 @@ package com.tetrisbot.gameobjects.tetrispieces;
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.BlockColor;
 import com.tetrisbot.gameobjects.Board;
-import com.tetrisbot.utils.TetrisRandom;
-
-import java.util.Random;
 
 public class OBlock extends BlockTemplate {
-    public OBlock(Random r) {
-        super(r);
+    public OBlock() {
+        color = BlockColor.YELLOW;
         for(int i = 0; i < blocks.length; i++) {
             blocks[i] = new Block(color, 4, 0);
         }

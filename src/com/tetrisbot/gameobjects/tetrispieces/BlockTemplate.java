@@ -17,10 +17,9 @@ public abstract class BlockTemplate {
     protected BlockColor color;
     private boolean isMovingDown;
 
-    protected BlockTemplate(Random r) {
+    protected BlockTemplate() {
         isMovingDown = false;
         blocks = new Block[4];
-        color = TetrisRandom.chooseColor(r);
         rotationState = 0;
     }
 

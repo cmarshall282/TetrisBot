@@ -3,15 +3,12 @@ package com.tetrisbot.gameobjects.tetrispieces;
 import com.tetrisbot.gameobjects.Block;
 import com.tetrisbot.gameobjects.BlockColor;
 import com.tetrisbot.gameobjects.Board;
-import com.tetrisbot.utils.TetrisRandom;
 import com.tetrisbot.utils.Vector2D;
-
-import java.util.Random;
 
 public class IBlock extends BlockTemplate {
 
-    public IBlock(Random r) {
-        super(r);
+    public IBlock() {
+        color = BlockColor.LIGHT_BLUE;
         rotationState = 3;
         for(int i = 0; i < blocks.length; i++) {
             blocks[i] = new Block(color, 4, 0);
