@@ -90,6 +90,7 @@ public class Game extends Canvas implements Runnable{
                 if(currentBlock.isMovingDown()) {
                     if(!currentBlock.checkCollision(board)) {
                         currentBlock.tick();
+                        this.addScore(1);
                     }
                 }
             }
@@ -104,6 +105,7 @@ public class Game extends Canvas implements Runnable{
                         final int y = block.getY() + block.getyPerm();
                         board.setOccupiedColors(x, y, currentBlock.getColor());
                     }
+                    board.clearFullRows();
                     currentBlock = TetrisRandom.initBlock(r);
                 }
             }
@@ -171,6 +173,10 @@ public class Game extends Canvas implements Runnable{
 
     public int getScore() {
         return score;
+    }
+
+    public void addScore(int points) {
+        this.score += points;
     }
 
     public String getStringScore() {

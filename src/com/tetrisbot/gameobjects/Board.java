@@ -40,6 +40,8 @@ public class Board {
     }
 
     public void render(Graphics g) {
+        g.setColor(Color.BLUE);
+        g.fillRect(0, 0, game.getWidth(), game.getHeight());
         g.setColor(Color.DARK_GRAY);
         g.fillRect(offset, 0, 400, 800);
         for(int x = 0; x < occupiedColors.length; x++) {
@@ -93,19 +95,54 @@ public class Board {
         return false;
     }
 
-    public int[] getFullRows() {
+    public void clearFullRows() {
+        // Initialize a list of rows to clear, set each value to -1 to mean null
         int[] rowsToClear = new int[4];
+        for(int i = 0; i < rowsToClear.length; i++) {
+            rowsToClear[i] = -1;
+        }
+
+        // loop  through each row and add it to rowsToClear if the row is full
         int listIndex = 0;
-        for(int x = 0; x < width; x++) {
+        for(int row = 0; row < height; row++) {
             int blocksInRow = 0;
-            for(int y = 0; y < height; y++) {
-                if(occupiedColors[x][y] != null) blocksInRow++;
+            for(int column = 0; column < width; column++) {
+                if(cellOccupied(column, row)) blocksInRow++;
             }
             if(blocksInRow == width) {
-                rowsToClear[listIndex] = x;
+                rowsToClear[listIndex] = row;
                 listIndex++;
             }
         }
-        return rowsToClear;
+
+        // loop through each full row and clear it, then move all above rows down
+        for(int row : rowsToClear) {
+            if(row != -1) {
+                for(int column = 0; column < width; column++) {
+                    setOccupiedColors(column, row, null);
+                }
+                for(int lowerRow = row; lowerRow > 0; lowerRow--) {
+                    for(int column = 0; column < width; column++) {
+                        occupiedColors[column][lowerRow] = occupiedColors[column][lowerRow - 1];
+                    }
+                }
+            }
+        }
+
+        // add to score
+        switch (listIndex) {
+            case 1:
+                game.addScore(40);
+                break;
+            case 2:
+                game.addScore(100);
+                break;
+            case 3:
+                game.addScore(300);
+                break;
+            case 4:
+                game.addScore(1200);
+                break;
+        }
     }
 }

@@ -8,8 +8,6 @@ Implement NEAT as a Tetris bot
 
 ##Ben
 Swap key input to key codes<br/>
-Fix side collision<br/>
-Set up row clearing and scoring<br/>
 Add sound effects<br/>
 Fix window sizing problems
 
