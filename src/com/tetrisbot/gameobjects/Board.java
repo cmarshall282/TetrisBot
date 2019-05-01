@@ -85,12 +85,15 @@ public class Board {
     }
 
     public void setOccupiedColors(int x, int y, BlockColor c) {
-        this.occupiedColors[x][y] = c;
+        if(x >= 0 && x < width && y > 0 && y < height)
+            this.occupiedColors[x][y] = c;
     }
 
     public boolean cellOccupied(int x, int y) {
-        if(occupiedColors[x][y] != null) {
-            return true;
+        if(x >= 0 && x < width && y > 0 && y < height) {
+            if (occupiedColors[x][y] != null) {
+                return true;
+            }
         }
         return false;
     }
