@@ -18,7 +18,6 @@ public class MainMenu {
 
     public void tick() {
     }
-
     public void render(Graphics g) {
         BufferedImage backGround = TetrisGraphics.loadImage("MainMenuBackground.png");
         BufferedImage logo = TetrisGraphics.loadImage("TetrisLogo.png");
@@ -38,13 +37,13 @@ public class MainMenu {
         final Rectangle loadButton = new Rectangle(150, 530, 300, 60);
         final Rectangle trainButton = new Rectangle(150, 610, 300, 60);
         if(playerButton.contains(loc)) {
-            System.out.println("playerButton was pressed");
+            //System.out.println("playerButton was pressed");
             game.setState(State.Running);
+            game.playSong();
         } else if (loadButton.contains(loc)) {
-            System.out.println("loadButton was pressed");
+            //System.out.println("loadButton was pressed");
         } else if (trainButton.contains(loc)) {
-            System.out.println("trainButton was pressed");
+            //System.out.println("trainButton was pressed");
         }
     }
-
 }

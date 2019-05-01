@@ -7,6 +7,7 @@ import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
 import com.tetrisbot.input.KeyInput;
 import com.tetrisbot.input.MouseInput;
 import com.tetrisbot.utils.TetrisRandom;
+import com.tetrisbot.utils.audio.Sound;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable{
     private BlockTemplate currentBlock;
     private Window window;
     private int score;
+    private Sound song;
 
     public Game() {
         if(System.getProperty("os.name").contains("Windows")) {
@@ -40,6 +42,8 @@ public class Game extends Canvas implements Runnable{
         }
 
         r = new Random();
+        song = new Sound("TetrisTheme.wav", this);
+        song.setVolume(0.1);
         currentBlock = TetrisRandom.initBlock(r);
         gameDelay = 0.0;
         running = false;
@@ -181,5 +185,9 @@ public class Game extends Canvas implements Runnable{
 
     public String getStringScore() {
         return "" + score;
+    }
+
+    public void playSong() {
+        song.loop();
     }
 }
