@@ -38,9 +38,7 @@ public abstract class BlockTemplate {
         }
     }
 
-    public void keyPressed(KeyEvent e, Board board) {
-        int key = e.getKeyCode();
-
+    public void keyPressed(int key, Board board) {
         boolean canMove = true;
         if(key == KeyEvent.VK_LEFT) {
             if(checkCollision(board, -1)) canMove = false;
@@ -60,7 +58,7 @@ public abstract class BlockTemplate {
             }
 
             for (int i = 0; i < blocks.length; i++) {
-                blocks[i].keyPressed(e, canMoveRight, canMoveLeft);
+                blocks[i].keyPressed(key, canMoveRight, canMoveLeft);
             }
 
             if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && canRotate) rotate();
@@ -68,9 +66,7 @@ public abstract class BlockTemplate {
         }
     }
 
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-
+    public void keyReleased(int key) {
         if(key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) isMovingDown = false;
     }
 

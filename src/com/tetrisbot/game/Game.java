@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
 
-    private static final int width = 600;
+    private static final int width = 700;
     private static final int height = 800;
     private static final String title = "Tetris";
     private boolean running;
@@ -164,17 +164,16 @@ public class Game extends Canvas implements Runnable{
         this.gameState = state;
     }
 
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
+    public void keyPressed(int key) {
         if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP ||
         key == KeyEvent.VK_A || key == KeyEvent.VK_D || key == KeyEvent.VK_W) {
             moveSound.play();
         }
-        currentBlock.keyPressed(e, board);
+        currentBlock.keyPressed(key, board);
     }
 
-    public void keyReleased(KeyEvent e) {
-        currentBlock.keyReleased(e);
+    public void keyReleased(int key) {
+        currentBlock.keyReleased(key);
     }
 
     public int getScore() {

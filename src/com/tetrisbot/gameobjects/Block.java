@@ -26,9 +26,7 @@ public class Block {
         y++;
     }
 
-    public void keyPressed(KeyEvent e, boolean canMoveRight, boolean canMoveLeft) {
-        int key = e.getKeyCode();
-
+    public void keyPressed(int key, boolean canMoveRight, boolean canMoveLeft) {
         if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
             if(canMoveLeft) x--;
         } else if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {

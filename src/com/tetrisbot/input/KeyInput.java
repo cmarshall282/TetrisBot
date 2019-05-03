@@ -15,12 +15,12 @@ public class KeyInput extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        game.keyPressed(e);
+        game.keyPressed(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        game.keyReleased(e);
+        game.keyReleased(e.getKeyCode());
     }
 
 }

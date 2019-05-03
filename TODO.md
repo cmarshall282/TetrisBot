@@ -7,9 +7,7 @@ Get working NEAT algorithm(expand on later)<br/>
 Implement NEAT as a Tetris bot
 
 ##Ben
-Swap key input to key codes<br/>
 Add sound effects<br/>
-Fix window sizing problems
 
 ##General
 Options Menu<br/>
