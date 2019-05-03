@@ -18,7 +18,7 @@ import java.util.Random;
 public class Game extends Canvas implements Runnable{
 
     private static final int width = 600;
-    private static int height = 800;
+    private static final int height = 800;
     private static final String title = "Tetris";
     private boolean running;
     private Thread thread;
@@ -35,14 +35,7 @@ public class Game extends Canvas implements Runnable{
     private Sound clearRowSound;
 
     public Game() {
-        if(System.getProperty("os.name").contains("Windows")) {
-            //height += 29;
-            height += 29;
-        } else if(System.getProperty("os.name").contains("Mac")) {
-            System.out.println("Mac");
-            height += 22;
-        }
-
+        setSize(new Dimension(width, height));
         r = new Random();
         song = new Sound("TetrisTheme.wav", this);
         moveSound = new Sound("MovementSound.wav", this);
@@ -51,7 +44,7 @@ public class Game extends Canvas implements Runnable{
         currentBlock = TetrisRandom.initBlock(r);
         gameDelay = 0.0;
         running = false;
-        window = new Window(width, height, title, this);
+        window = new Window(title, this);
         gameState = State.MainMenu;
         mainMenu = new MainMenu(this);
         addMouseListener(new MouseInput(this));
@@ -141,9 +134,9 @@ public class Game extends Canvas implements Runnable{
     }
 
     public synchronized void start() {
-        running = true;
         if(thread == null) thread = new Thread(this);
         thread.start();
+        running = true;
     }
 
     public synchronized void stop() {
