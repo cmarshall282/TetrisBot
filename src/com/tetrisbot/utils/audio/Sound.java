@@ -7,6 +7,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -17,8 +18,9 @@ public class Sound {
     public Sound(String fileName, Game game) {
         try {
             //InputStream soundURL = Sound.class.getClassLoader().getResourceAsStream(fileName);
-            InputStream soundURL = game.getClass().getClassLoader().getResourceAsStream("audio/" + fileName);
-            AudioInputStream stream = AudioSystem.getAudioInputStream(soundURL);
+            InputStream soundURL = game.getClass().getClassLoader().getResourceAsStream(fileName);
+            InputStream bufferedIn = new BufferedInputStream(soundURL);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(bufferedIn);
             clip = AudioSystem.getClip();
             clip.open(stream);
         } catch (Exception e) {
