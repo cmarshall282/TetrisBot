@@ -1,6 +1,7 @@
 package com.tetrisbot.game;
 
 import com.tetrisbot.gameobjects.Block;
+import com.tetrisbot.gameobjects.BlockConfig;
 import com.tetrisbot.gameobjects.Board;
 import com.tetrisbot.gameobjects.MainMenu;
 import com.tetrisbot.gameobjects.tetrispieces.BlockTemplate;
@@ -16,7 +17,9 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
 public class Game extends Canvas implements Runnable {
 
@@ -32,6 +35,7 @@ public class Game extends Canvas implements Runnable {
     private Random r;
     private BlockTemplate currentBlock;
     private BlockTemplate holdBlock;
+    private BlockTemplate nextBlock;
     private Window window;
     private int score;
     private int rows;
@@ -41,15 +45,19 @@ public class Game extends Canvas implements Runnable {
     private Sound clearRowSound;
     private double updateDelay;
     private boolean canSwap;
+    private ArrayList<BlockConfig> blockSet;
 
     public Game() {
         setSize(new Dimension(width, height));
         r = new Random();
+        blockSet = TetrisRandom.chooseBlocks(r);
         song = new Sound("TetrisTheme.wav", this);
         moveSound = new Sound("MovementSound.wav", this);
         clearRowSound = new Sound("ClearRowSound.wav", this);
         song.setVolume(0.1);
-        currentBlock = TetrisRandom.initBlock(r);
+        nextBlock = TetrisRandom.initNext(blockSet);
+        currentBlock = TetrisRandom.initBlock(blockSet);
+        nextBlock.moveToNext();
         holdBlock = null;
         gameDelay = 0.0;
         running = false;
@@ -108,7 +116,7 @@ public class Game extends Canvas implements Runnable {
                     }
                 }
             }
-            if (gameDelay >= 60.0) {
+            if (gameDelay >= updateDelay) {
                 gameDelay = 0.0;
                 if(!currentBlock.checkCollision(board)) {
                     currentBlock.tick();
@@ -120,7 +128,10 @@ public class Game extends Canvas implements Runnable {
                         board.setOccupiedColors(x, y, currentBlock.getColor());
                     }
                     if(board.clearFullRows()) clearRowSound.play();
-                    currentBlock = TetrisRandom.initBlock(r);
+                    if(blockSet.size() == 1) blockSet.addAll(TetrisRandom.chooseBlocks(r));
+                    nextBlock = TetrisRandom.initNext(blockSet);
+                    nextBlock.moveToNext();
+                    currentBlock = TetrisRandom.initBlock(blockSet);
                     canSwap = true;
                 }
             }
@@ -141,19 +152,21 @@ public class Game extends Canvas implements Runnable {
         } else if(gameState == State.Running){
             board.render(g);
             currentBlock.render(this, g);
+            nextBlock.render(this, g);
             if(holdBlock != null) holdBlock.render(this, g);
             g.setColor(Color.BLACK);
             g.fillRect(398, 0, 4, height);
             g.setFont(new Font("Verdana", Font.BOLD, 24));
             g.setColor(Color.WHITE);
-            g.drawString("Level", 420, 240);
-            g.drawString("Rows", 420, 280);
-            g.drawString("Score", 420, 320);
+            g.drawString("Level", 420, 280);
+            g.drawString("Rows", 420, 320);
+            g.drawString("Score", 420, 360);
             g.drawString("Hold", 470, 30);
+            g.drawString("Next", 470, 610);
             g.setFont(new Font("Verdana", Font.PLAIN, 24));
-            g.drawString("" + level, 510, 240);
-            g.drawString("" + rows, 510, 280);
-            g.drawString(getStringScore(), 510, 320);
+            g.drawString("" + level, 510, 280);
+            g.drawString("" + rows, 510, 320);
+            g.drawString(getStringScore(), 510, 360);
         }
 
         g.dispose();
@@ -201,7 +214,7 @@ public class Game extends Canvas implements Runnable {
                 if(holdBlock == null) {
                     holdBlock = currentBlock;
                     Point p = currentBlock.getPosition();
-                    currentBlock = TetrisRandom.initBlock(r);
+                    currentBlock = TetrisRandom.initBlock(blockSet);
                     currentBlock.setPosition(p.x, p.y);
                     holdBlock.moveToHold();
                 } else {
@@ -236,10 +249,10 @@ public class Game extends Canvas implements Runnable {
 
     public void updateLevel() {
         if((rows / level) >= (5 * level)) {
-            this.level++;
             if (updateDelay > 30.0) {
-                updateDelay -= 5.0;
+                updateDelay -= 5.0 * level;
             }
+            this.level++;
         }
     }
 

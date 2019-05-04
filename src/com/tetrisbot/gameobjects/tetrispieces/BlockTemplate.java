@@ -104,8 +104,17 @@ public abstract class BlockTemplate {
     }
 
     public void moveToHold() {
+        // Set it to its initial position for display
+        rotationState = 3;
+        rotate();
         for(Block block : blocks) {
             block.setPosition(11, 2);
+        }
+    }
+
+    public void moveToNext() {
+        for(Block block : blocks) {
+            block.setPosition(11, 16);
         }
     }
 

@@ -3,16 +3,32 @@ package com.tetrisbot.utils;
 import com.tetrisbot.gameobjects.BlockConfig;
 import com.tetrisbot.gameobjects.tetrispieces.*;
 
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class TetrisRandom {
-    public static BlockConfig chooseConfig(Random r) {
-        int index = r.nextInt(BlockConfig.values().length);
-        return BlockConfig.values()[index];
+
+    public static ArrayList<BlockConfig> chooseBlocks(Random r) {
+        List<BlockConfig> blockConfigs = Arrays.asList(BlockConfig.values());
+        ArrayList<BlockConfig> output = new ArrayList<>(blockConfigs);
+        Collections.shuffle(output);
+        return output;
     }
 
-    public static BlockTemplate initBlock(Random r) {
-        BlockConfig blockConfig = chooseConfig(r);
+    public static BlockTemplate initBlock(List<BlockConfig> blockSet) {
+        BlockConfig blockConfig = blockSet.get(0);
+        blockSet.remove(0);
+        return getBlock(blockConfig);
+    }
+
+    public static BlockTemplate initNext(List<BlockConfig> blockSet) {
+        //NOTE: always initialize next block BEFORE the current one
+        BlockConfig blockConfig = blockSet.get(1); //block after current one
+        return getBlock(blockConfig);
+    }
+
+    private static BlockTemplate getBlock(BlockConfig blockConfig) {
+        //Utility function for initializers, not meant for public access
         BlockTemplate output = null;
         switch(blockConfig) {
             case I_BLOCK:
