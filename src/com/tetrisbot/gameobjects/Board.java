@@ -31,7 +31,7 @@ public class Board {
         }
 
         String[] fileNames = {"GreenPiece.png", "BluePiece.png", "OrangePiece.png", "PurplePiece.png",
-        "RedPiece.png", "YellowPiece.png", "LightBluePIece.png"};
+        "RedPiece.png", "YellowPiece.png", "LightBluePiece.png"};
 
         blockImages = new BufferedImage[7];
         for(int i = 0; i < blockImages.length; i++) {
