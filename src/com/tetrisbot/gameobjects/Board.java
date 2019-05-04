@@ -52,11 +52,6 @@ public class Board {
                 }
             }
         }
-
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-        g.drawString("Score", 10, 25);
-        g.drawString(game.getStringScore(), 10, 50);
     }
 
     public void fillCell(Graphics g, BlockColor c, int x, int y) {
@@ -135,16 +130,24 @@ public class Board {
         // add to score
         switch (listIndex) {
             case 1:
-                game.addScore(40);
+                game.addScore(40 * game.getLevel());
+                game.addRows(1);
+                game.updateLevel();
                 break;
             case 2:
-                game.addScore(100);
+                game.addScore(100 * game.getLevel());
+                game.addRows(2);
+                game.updateLevel();
                 break;
             case 3:
-                game.addScore(300);
+                game.addScore(300 * game.getLevel());
+                game.addRows(3);
+                game.updateLevel();
                 break;
             case 4:
-                game.addScore(1200);
+                game.addScore(1200 * game.getLevel());
+                game.addRows(4);
+                game.updateLevel();
                 break;
         }
 

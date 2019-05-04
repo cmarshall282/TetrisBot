@@ -102,4 +102,20 @@ public abstract class BlockTemplate {
     public boolean isMovingDown() {
         return isMovingDown;
     }
+
+    public void moveToHold() {
+        for(Block block : blocks) {
+            block.setPosition(11, 2);
+        }
+    }
+
+    public void setPosition(int x, int y) {
+        for(Block block : blocks) {
+            block.setPosition(x, y);
+        }
+    }
+
+    public Point getPosition() {
+        return new Point(blocks[0].getX(), blocks[0].getY());
+    }
 }
