@@ -1,5 +1,7 @@
 package com.tetrisbot.utils;
 
+import com.tetrisbot.bot.Connection;
+import com.tetrisbot.bot.Node;
 import com.tetrisbot.gameobjects.BlockConfig;
 import com.tetrisbot.gameobjects.tetrispieces.*;
 
@@ -54,5 +56,15 @@ public class TetrisRandom {
                 break;
         }
         return output;
+    }
+
+    public static Connection chooseConnection(ArrayList<Connection> connections, Random r) {
+        int index = r.nextInt(connections.size());
+        return connections.get(index);
+    }
+
+    public static Node chooseNode(ArrayList<Node> nodes, Random r) {
+        int index = r.nextInt(nodes.size());
+        return nodes.get(index);
     }
 }
